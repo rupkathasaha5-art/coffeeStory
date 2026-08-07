@@ -21,12 +21,13 @@ export default function CoffeeBean() {
   useEffect(() => {
     scene.traverse((child) => {//looks thru every single part of the model
       if (child.isMesh) {
-        child.material.roughness = 0.35; 
-        child.material.metalness = 0.1;
-        child.material.color = new THREE.Color('#2b170b');
-        child.material.needsUpdate = true;
+        child.material.roughness=0.35; 
+        child.material.metalness=0.1;
+        child.material.color=new THREE.Color('#2b170b');
+        child.material.needsUpdate=true;
       }
     });
+     
   }, [scene]);
   //changing the cursor
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function CoffeeBean() {
     if (!beanRef.current) return;//to check if the bean is fully loaded on the screen
     
     const offset=scroll.offset;//gets a no b/w 0->top of the page & 1->bottom of the page representing how far down the page the user has scrolled
-
+    
     //throws the bean backward on scroll
     beanRef.current.position.z=Math.max(-offset*20,-10);
     
@@ -93,7 +94,7 @@ export default function CoffeeBean() {
     <primitive //primitive tag puts the bean on the screen
       object={scene} 
       ref={beanRef} 
-      position={[0, 0, 1]} 
+      position={[0, 0, -10]}
       onPointerOver={(e) => {
         e.stopPropagation();
         setHovered(true);
